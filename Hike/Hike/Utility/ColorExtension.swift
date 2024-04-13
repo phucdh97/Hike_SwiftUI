@@ -28,4 +28,9 @@ extension LinearGradient {
                                                       .customGrayMedium],
                                              startPoint: .top,
                                              endPoint: .bottom)
+    
+    static let customGray2 = LinearGradient(colors: [.customGrayMedium,
+                                                      .customGrayLight],
+                                             startPoint: .top,
+                                             endPoint: .bottom)
 }
