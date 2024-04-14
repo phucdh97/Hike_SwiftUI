@@ -12,7 +12,7 @@ struct CardView: View {
     
     @State private var imageNumber: Int = 1
     @State private var randomNumber: Int = 1
-    
+    @State private var isShowingSheet = false
     // MARK: - FUNCTIONS
     
     func randomImage() {
@@ -48,13 +48,16 @@ struct CardView: View {
                         Spacer()
                         
                         Button {
-                            // Action:
-                            print("Button did tap")
+                            isShowingSheet.toggle()
                         } label: {
                             CustomButtonView()
                         }
                     }
-                    
+                    .sheet(isPresented: $isShowingSheet, content: {
+                        SettingView()
+                            .presentationDragIndicator(.visible)
+                            .presentationDetents([.medium, .large])
+                    })
                     
                     Text("Fun and enjoyable outdoor activity for friends and families")
                         .multilineTextAlignment(.leading)
@@ -66,15 +69,9 @@ struct CardView: View {
                 
                 // MARK: - MAIN CONTENT
                 ZStack {
-                    Circle()
-                        .fill(
-                            LinearGradient(colors: [Color("ColorIndigoMedium"),
-                                                    Color("ColorSalmonLight")],
-                                           startPoint: .topLeading,
-                                           endPoint: .bottomTrailing
-                                          )
-                        )
-                        .frame(width: 256, height: 256)
+
+                    CustomCircleView()
+                    
                     Image("image-\(imageNumber)")
                         .resizable()
                         .scaledToFit()
